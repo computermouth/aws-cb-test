@@ -7,6 +7,8 @@ phases:
       - ./build.sh
       - ls
       - echo ${CODEBUILD_BUILD_ID}
+      - export BUILDNUM=$(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g')
+      - echo ${BUILDNUM}
 
 artifacts:
   files:
