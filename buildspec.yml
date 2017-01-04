@@ -6,9 +6,12 @@ phases:
       - pwd && ls
       - ./build.sh
       - ls
+      - apt-get install sed
       - echo ${CODEBUILD_BUILD_ID}
       - export BUILDNUM=$(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g')
       - echo ${BUILDNUM}
+      - mkdir ${BUILDNUM}
+      - ls
 
 artifacts:
   files:
