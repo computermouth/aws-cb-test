@@ -11,6 +11,8 @@ phases:
       - echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g'
       - echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g' > buildnum
       - ls
+      - mkdir $(cat buildnum)
+      - ls
 
 artifacts:
   files:
