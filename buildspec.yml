@@ -8,9 +8,8 @@ phases:
       - ls
       - apt-get install sed
       - echo ${CODEBUILD_BUILD_ID}
-      - export BUILDNUM=$(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g')
-      - echo ${BUILDNUM}
-      - mkdir ${BUILDNUM}
+      - echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g'
+      - echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g' > buildnum
       - ls
 
 artifacts:
