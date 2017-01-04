@@ -6,6 +6,7 @@ phases:
       - pwd && ls
       - ./build.sh
       - ls
+      - echo ${CODEBUILD_BUILD_ID}
 
 artifacts:
   files:
