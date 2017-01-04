@@ -6,15 +6,16 @@ phases:
       - pwd && ls
       - ./build.sh
       - ls
+      - mkdir output
+      - mkdir output/subdir
+      - touch output/subdir/empty
       - mkdir ${CODEBUILD_BUILD_ID}
-      - mkdir ${CODEBUILD_BUILD_ID}/subdir
-      - touch ${CODEBUILD_BUILD_ID}/subdir/empty
-      - echo ${CODEBUILD_BUILD_ID} > latest
+      - echo ${CODEBUILD_BUILD_ID} > output/latest
       - cp file ${CODEBUILD_BUILD_ID}
-      - tar -zcf $(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz ${CODEBUILD_BUILD_ID}
+      - tar -zcf output/$(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz ${CODEBUILD_BUILD_ID}
       - ls
 
 artifacts:
   files:
-    - $(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz
+    - output/**/*
     - latest
