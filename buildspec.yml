@@ -7,11 +7,14 @@ phases:
       - ./build.sh
       - ls
       - mkdir ${CODEBUILD_BUILD_ID}
+      - mkdir ${CODEBUILD_BUILD_ID}/subdir
+      - touch ${CODEBUILD_BUILD_ID}/subdir/empty
       - echo ${CODEBUILD_BUILD_ID} > latest
       - cp file ${CODEBUILD_BUILD_ID}
+      - tar -zcf ${CODEBUILD_BUILD_ID}.tar.gz ${CODEBUILD_BUILD_ID}
       - ls
 
 artifacts:
   files:
-    - ${CODEBUILD_BUILD_ID}
+    - ${CODEBUILD_BUILD_ID}.tar.gz
     - latest
