@@ -9,13 +9,12 @@ phases:
       - mkdir output
       - mkdir output/subdir
       - touch output/subdir/empty
-      - mkdir ${CODEBUILD_BUILD_ID}
       - echo ${CODEBUILD_BUILD_ID} > output/latest
-      - cp file ${CODEBUILD_BUILD_ID}
+      - cp file output/subdir
       - tar -zcf output/$(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz ${CODEBUILD_BUILD_ID}
       - ls
 
 artifacts:
   files:
     - output/**/*
-    - latest
+    - $(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz
