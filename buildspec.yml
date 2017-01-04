@@ -16,5 +16,5 @@ phases:
 
 artifacts:
   files:
-    - ${CODEBUILD_BUILD_ID}.tar.gz
+    - $(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz
     - latest
