@@ -4,17 +4,14 @@ phases:
   build:
     commands:
       - pwd && ls
+      - ./env.sh
       - ./build.sh
       - ls
-      - mkdir output
-      - mkdir output/subdir
-      - touch output/subdir/empty
-      - echo ${CODEBUILD_BUILD_ID} > output/latest
-      - cp file output/subdir
-      - tar -zcf output/$(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz ${CODEBUILD_BUILD_ID}
+      - echo ${BUILD_NUM} > latest
+      - tar -zcf ${BUILD_NUM}.tar.gz file
       - ls
 
 artifacts:
   files:
-    - output/**/*
-    - $(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz
+    - latest
+    - ${BUILD_NUM}.tar.gz
