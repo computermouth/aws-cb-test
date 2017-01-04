@@ -19,4 +19,4 @@ phases:
 
 artifacts:
   files:
-    - ${JOB_NAME}/**/*
+    - aws-cb-test/**/*
