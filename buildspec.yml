@@ -6,14 +6,12 @@ phases:
       - pwd && ls
       - ./build.sh
       - ls
-      - apt-get install sed
-      - echo ${CODEBUILD_BUILD_ID}
-      - echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g'
-      - echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g' > buildnum
-      - ls
-      - mkdir $(cat buildnum)
+      - mkdir ${CODEBUILD_BUILD_ID}
+      - echo ${CODEBUILD_BUILD_ID} > latest
+      - cp file ${CODEBUILD_BUILD_ID}
       - ls
 
 artifacts:
   files:
-    - file
+    - ${CODEBUILD_BUILD_ID}/**/*
+    - latest
