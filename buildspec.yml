@@ -1,21 +1,18 @@
 version: 0.1
 
-environment_variables:
-  plaintext:
-    JOB_NAME: "aws-cb-test"
-
 phases:
+  pre_build:
+    commands:
+      - mkdir aws-cb-test
+      - echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g' > latest
   build:
     commands:
-      - pwd && ls
       - ./build.sh
-      - ls
-      - mkdir ${JOB_NAME}
-      - echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g' > latest
-      - tar -zcf $(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz file
-      - cp latest ${JOB_NAME}
-      - cp $(echo ${CODEBUILD_BUILD_ID} | sed 's/.*://g').tar.gz ${JOB_NAME}
-      - ls
+      - tar -zcf $(cat latest).tar.gz file
+  post_build:
+    commands:
+      - cp latest aws-cb-test
+      - cp $(cat latest).tar.gz aws-cb-test
 
 artifacts:
   files:
